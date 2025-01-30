@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
@@ -5,7 +6,7 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   background: linear-gradient(135deg, #ff7e5f, #feb47b);
   display: flex;
   justify-content: center;
@@ -29,20 +30,23 @@ body {
   position: absolute;
   width: 400%;
   height: 100%;
-  background: url('background.png') repeat-x;
+  background: url("background.png") repeat-x;
   animation: moveBackground 10s linear infinite;
 }
 
 @keyframes moveBackground {
-  0% { left: 0; }
-  100% { left: -1200px; }
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -1200px;
+  }
 }
-
 #character {
   position: absolute;
   width: 60px;
   height: 60px;
-  background: url('character.png') no-repeat center/cover;
+  background: url("character.png") no-repeat center/cover;
   top: 50%;
   left: 50px;
   z-index: 10;
@@ -50,20 +54,29 @@ body {
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
-
 .pipe {
   position: absolute;
   width: 60px;
-  background: url('assets/sprites/bottom.png');
+  background: url("assets/sprites/bottom.png");
   background-repeat: repeat;
   background-size: contain;
   transition: right 0.1s linear;
   z-index: 5;
 }
-.pipehead{
+.pipe-green {
+  background: url("assets/sprites/bottomgreen.png");
+  background-repeat: repeat;
+  background-size: contain;
+}
+
+.pipehead {
   position: relative;
   width: 76px;
   height: 40px;
@@ -73,8 +86,13 @@ body {
   z-index: 6;
   left: -6px;
 }
+.pipehead-green {
+  background: url(assets/sprites/topgreen.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 
-.pipe.top{
+.pipe.top {
   transform: rotate(180deg);
 }
 
@@ -82,16 +100,19 @@ body {
   position: absolute;
   width: 30px;
   height: 30px;
-  background: url('bacon.png') no-repeat center/cover;
+  background: url("bacon.png") no-repeat center/cover;
   z-index: 7;
   animation: spin 2s linear infinite;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
-
 #score {
   position: absolute;
   top: 10px;
@@ -223,7 +244,7 @@ body {
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   background: linear-gradient(135deg, #ff7e5f, #feb47b);
   display: flex;
   justify-content: center;
@@ -301,8 +322,13 @@ body {
 }
 
 /* Rest des CSS bleibt unverändert */
-
 @keyframes explode {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(3); opacity: 0; }
-}
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}/*# sourceMappingURL=styles.css.map */

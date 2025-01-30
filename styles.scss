@@ -1,0 +1,320 @@
+//this needs to be compiled on each save
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  #game-container {
+    position: relative;
+    width: 400px;
+    height: 600px;
+    background-color: #87CEEB;
+    border: 5px solid #333;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  }
+  
+  #background {
+    position: absolute;
+    width: 400%;
+    height: 100%;
+    background: url('background.png') repeat-x;
+    animation: moveBackground 10s linear infinite;
+  }
+  
+  @keyframes moveBackground {
+    0% { left: 0; }
+    100% { left: -1200px; }
+  }
+  
+  #character {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: url('character.png') no-repeat center/cover;
+    top: 50%;
+    left: 50px;
+    z-index: 10;
+    animation: float 2s infinite ease-in-out;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .pipe {
+    position: absolute;
+    width: 60px;
+    background: url('assets/sprites/bottom.png');
+    background-repeat: repeat;
+    background-size: contain;
+    transition: right 0.1s linear;
+    z-index: 5;
+    &-green{
+        background: url('assets/sprites/bottomgreen.png');
+        background-repeat: repeat;
+        background-size: contain;
+    }
+  }
+  .pipehead{
+    position: relative;
+    width: 76px;
+    height: 40px;
+    background: url(assets/sprites/top.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: 6;
+    left: -6px;
+    &-green{
+        background: url(assets/sprites/topgreen.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+  }
+  
+  .pipe.top{
+    transform: rotate(180deg);
+  }
+  
+  .bacon {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: url('bacon.png') no-repeat center/cover;
+    z-index: 7;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  #score {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+  }
+  
+  #distance {
+    position: absolute;
+    bottom: 10px;
+    font-size: 17px;
+    left: 10px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+  }
+  
+  #game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    color: #ff0000;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 10;
+  }
+  
+  #restart-button {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: #fff;
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  #restart-button:hover {
+    background-color: #45a049;
+  }
+  
+  #start-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: #fff;
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  #start-button:hover {
+    background-color: #45a049;
+  }
+  
+  #instructions {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+  }
+  
+  .particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #FFD700;
+    border-radius: 50%;
+    animation: explode 1s ease-out;
+  }
+  
+  #leaderboard {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  #leaderboard h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    text-align: center;
+  }
+  
+  #leaderboard-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #leaderboard-list li {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #fff;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    flex-direction: column; /* Änderung: Spielelemente vertikal ausrichten */
+  }
+  
+  #game-container {
+    position: relative;
+    width: 400px;
+    height: 600px;
+    background-color: #87CEEB;
+    border: 5px solid #333;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px; /* Abstand zum Leaderboard */
+  }
+  
+  #wallet-input {
+    margin-bottom: 20px; /* Abstand zum Spielbereich */
+    text-align: center;
+  }
+  
+  #wallet-input input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #4CAF50;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  #wallet-input button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #wallet-input button:hover {
+    background-color: #45a049;
+  }
+  
+  #leaderboard {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 300px; /* Breite des Leaderboards */
+    text-align: center;
+  }
+  
+  #leaderboard h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+  
+  #leaderboard-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #leaderboard-list li {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #fff;
+  }
+  
+  /* Rest des CSS bleibt unverändert */
+  
+  @keyframes explode {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
+  }

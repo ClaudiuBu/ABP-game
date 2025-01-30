@@ -81,7 +81,7 @@ function movePipes() {
                 gameOver();
             }
             if (pipeLeft === 50) {
-                updateScore();
+                // updateScore();
             }
         } else {
             resetPipe(pipe);
@@ -100,8 +100,8 @@ function updateDistance() {
 }
 
 function updateScore() {
-    score++;
-    scoreElement.textContent = `Score: ${score}`;
+    score = score + 1;
+    scoreElement.textContent = `Haram: ${score}`;
 }
 
 function resetPipe(pipe) {
@@ -137,10 +137,9 @@ function moveBacons() {
 function collectBacon(bacon) {
     bacon.remove();
     baconCount++;
-    score++; // Score um 1 erhöhen
-    scoreElement.textContent = `Score: ${score}`;
     playSound("collect.mp3");
     createParticles(parseInt(bacon.style.left) + 15, parseInt(bacon.style.top) + 15);
+    updateScore();//score updates on bacon collection
 }
 
 function resetBacon(bacon) {
@@ -194,7 +193,7 @@ function restartGame() {
     distance = 0;
     baconCount = 0;
     gameSpeed = 2; // Reset der Spielgeschwindigkeit
-    scoreElement.textContent = `Score: ${score}`;
+    scoreElement.textContent = `Haram: ${score}`;
     document.querySelectorAll(".pipe, .bacon").forEach(element => element.remove());
     generatePipes();
     generateBacons();
@@ -229,15 +228,29 @@ function generatePipes() {
 }
 
 function createPipe(className, height, top, left) {
+    //two cases green or normal
+    let classPipeBottom = "pipe";
+    let classPipeTop = "pipehead";
+
+    random  = Math.floor(Math.random() * 2);
+    console.log(random);
+    switch(random){
+        case 0: //default case
+            break;
+        case 1:
+            classPipeBottom = classPipeBottom + " pipe-green";
+            classPipeTop = classPipeTop + " pipehead-green";
+            break;
+    }
     const pipe = document.createElement("div");
-    pipe.className = `pipe ${className}`;
+    pipe.className = `${classPipeBottom} ${className}`;
     pipe.style.height = `${height}px`;
     pipe.style.top = `${top}px`;
     pipe.style.left = `${left}px`;
     gameContainer.appendChild(pipe);
     //append pipehead to pipe
     const pipeHead = document.createElement("div");
-    pipeHead.className = "pipehead";
+    pipeHead.className = classPipeTop;
     pipe.appendChild(pipeHead);
 }
 
