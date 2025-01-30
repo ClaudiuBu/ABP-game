@@ -57,10 +57,25 @@ body {
 .pipe {
   position: absolute;
   width: 60px;
-  background-color: #4CAF50;
+  background: url('assets/sprites/bottom.png');
+  background-repeat: repeat;
+  background-size: contain;
   transition: right 0.1s linear;
   z-index: 5;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+.pipehead{
+  position: relative;
+  width: 76px;
+  height: 40px;
+  background: url(assets/sprites/top.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 6;
+  left: -6px;
+}
+
+.pipe.top{
+  transform: rotate(180deg);
 }
 
 .bacon {

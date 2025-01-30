@@ -235,6 +235,10 @@ function createPipe(className, height, top, left) {
     pipe.style.top = `${top}px`;
     pipe.style.left = `${left}px`;
     gameContainer.appendChild(pipe);
+    //append pipehead to pipe
+    const pipeHead = document.createElement("div");
+    pipeHead.className = "pipehead";
+    pipe.appendChild(pipeHead);
 }
 
 
