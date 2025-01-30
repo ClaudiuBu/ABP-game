@@ -1,0 +1,34 @@
+<html>
+<head>
+        <title>Flappy Bacon</title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    </head>
+</head>
+
+<body>
+    <!-- audio file -->
+    <audio id="player" style="display:none;" autoplay controls><source src="lmao.mp3" type="audio/mp3"></audio>
+
+    <!-- Game Container -->
+    <div id="game-container">
+        <div id="background"></div>
+        <div id="score">Score: 0</div>
+        <div id="distance">Distance: 0</div>
+        
+        <div id="character"></div>
+        <div id="game-over">Game Over!</div>
+        <div id="restart-button">Restart</div>
+
+        <!-- Start button -->
+        <div id="start-button">Start</div>
+
+        <!-- Instructions -->
+        <div id="instructions">
+            <p>Press SPACE to jump!</p>
+            <p>Avoid the pipes and collect bacon!</p>
+        </div>
+    </div>
+</body>
+<script src="script.js"></script>
+</html>
