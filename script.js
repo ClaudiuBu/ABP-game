@@ -283,6 +283,50 @@ function playSound(soundFile) {
     audio.play();
 }
 
+let isJumping = false;
+
+function jump(event) {
+    if (event.code === "Space" && !isGameOver && !isJumping) {
+        isJumping = true;
+        characterTop += jumpForce;
+        character.style.top = `${characterTop}px`; 
+        character.style.transform = `rotate(-30deg)`; 
+        createParticles(characterLeft + 20, characterTop + 50);
+        playSound("jump.mp3");
+
+       
+        setTimeout(() => {
+            isJumping = false;
+            character.style.transform = `rotate(30deg)`; 
+        }, 200); 
+    }
+}
+
+function updateCharacterPosition() {
+    if (!isJumping) {
+        characterTop += gravity;
+        character.style.top = `${characterTop}px`; 
+
+       
+        if (characterTop < 0) {
+            characterTop = 0; 
+        } else if (characterTop > 540) { 
+            characterTop = 540; 
+        }
+
+        character.style.transform = `rotate(${characterTop >= 270 ? 6 : -6}deg)`; 
+    }
+}
+
+function startGame() {
+    startButton.style.display = "none";
+    instructions.style.display = "none";
+    characterTop = 250; 
+    character.style.top = `${characterTop}px`; 
+    gameLoop();
+    setInterval(generateBacons, 5000); 
+}
+
 generatePipes();
 generateBacons();
 updateLeaderboard();
