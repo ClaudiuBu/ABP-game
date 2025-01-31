@@ -19,7 +19,6 @@ let isGameOver = false;
 let score = 0;
 const jumpForce = -50;
 let baconCount = 0;
-
 let lastTime = 0;
 const frameRate = 60; // Ziel-Framerate
 const frameDelay = 1000 / frameRate;
@@ -219,22 +218,35 @@ function generatePipes() {
 
         if (bottomPipeHeight < PIPE_HEIGHT_MIN) {
             const adjustedGap = GAME_HEIGHT - topPipeHeight - PIPE_HEIGHT_MIN;
-            createPipe("top", topPipeHeight, 0, PIPE_START_LEFT + i * PIPE_SPACING);
-            createPipe("bottom", PIPE_HEIGHT_MIN, topPipeHeight + adjustedGap, PIPE_START_LEFT + i * PIPE_SPACING);
+            createPipe("top", topPipeHeight, 0, PIPE_START_LEFT + i * PIPE_SPACING, true);
+            createPipe("bottom", PIPE_HEIGHT_MIN, topPipeHeight + adjustedGap, PIPE_START_LEFT + i * PIPE_SPACING, true);
         } else {
-            createPipe("top", topPipeHeight, 0, PIPE_START_LEFT + i * PIPE_SPACING);
-            createPipe("bottom", bottomPipeHeight, topPipeHeight + gap, PIPE_START_LEFT + i * PIPE_SPACING);
+            createPipe("top", topPipeHeight, 0, PIPE_START_LEFT + i * PIPE_SPACING, true);
+            createPipe("bottom", bottomPipeHeight, topPipeHeight + gap, PIPE_START_LEFT + i * PIPE_SPACING, true);
         }
     }
 }
+/*
+ * Create pipe function
+ * returns pipe DOM element
+ * @param className: string
+ * @param height: int
+ * @param top: int
+ * @param left: int
+ * @param animate: boolean
+ */
+function createPipe(className, height, top, left,animate = false) {
 
-function createPipe(className, height, top, left) {
     //two cases green or normal
     let classPipeBottom = "pipe";
     let classPipeTop = "pipehead";
 
+    //max animationHeight
+    let maxAnimationHeight = 50;
+    let deltaAnimationTime = 5;
+
     random  = Math.floor(Math.random() * 2);
-    console.log(random);
+    //console.log(random); debug reasons
     switch(random){
         case 0: //default case
             break;
@@ -248,11 +260,53 @@ function createPipe(className, height, top, left) {
     pipe.style.height = `${height}px`;
     pipe.style.top = `${top}px`;
     pipe.style.left = `${left}px`;
+
+    //animation pipe
+    animate = Math.floor(Math.random() * 2);
+    if(distance % 100 == 0 && animate){
+        var newTop = top+Math.floor(Math.random() * maxAnimationHeight);
+        pipe.style.height = `${height+newTop}px`;
+        pipe.style.top = `${top+newTop}px`;
+        if(animate){
+            if(top == 0)
+            {
+                //top pipes
+                pipe.classList.add(createPipeAnimationClass(-newTop, 0, Math.floor(deltaAnimationTime)));
+            }
+            else{
+                //bottom pipes
+                pipe.classList.add(createPipeAnimationClass(top, newTop, Math.floor(deltaAnimationTime)));
+            }
+        }
+    }
+
     gameContainer.appendChild(pipe);
     //append pipehead to pipe
     const pipeHead = document.createElement("div");
     pipeHead.className = classPipeTop;
     pipe.appendChild(pipeHead);
+}
+
+function createPipeAnimationClass(initial, end, time) {
+    const className = `move-pipe-${initial}-${end}-${time}`;
+    const keyframes = `
+        @keyframes ${className} {
+            0% { top: ${initial}px; }
+            50% { top: ${end}px; }
+            100% { top: ${initial}px; }
+        }
+    `;
+    const style = `
+        .${className} {
+            animation: ${className} ${time}s linear infinite;
+        }
+    `;
+
+    const styleElement = document.createElement('style');
+    styleElement.innerHTML = keyframes + style;
+    document.head.appendChild(styleElement);
+
+    return className;
 }
 
 

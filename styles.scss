@@ -48,7 +48,7 @@
     top: 50%;
     left: 50px;
     z-index: 10;
-    animation: float 2s infinite ease-in-out;
+    transition: transform 0.2s ease-out;
   }
   
   @keyframes float {
@@ -314,7 +314,3 @@
   
   /* Rest des CSS bleibt unverändert */
   
-  @keyframes explode {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(3); opacity: 0; }
-  }
