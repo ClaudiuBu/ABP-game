@@ -43,6 +43,7 @@ function startGame() {
     startButton.style.display = "none";
     instructions.style.display = "none";
     gameLoop();
+    setInterval(generateBacons, 5000); // Generiere alle 5 Sekunden neue Bacons
 }
 
 function gameLoop(timestamp) {
