@@ -15,6 +15,61 @@ body {
   overflow: hidden;
 }
 
+#main-menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+}
+
+.menu-button {
+  font-size: 24px;
+  color: #fff;
+  background-color: #4CAF50;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.menu-button:hover {
+  background-color: #45a049;
+}
+
+#upgrades-menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+  color: #fff;
+  text-align: center;
+  z-index: 10;
+  display: none;
+}
+
+#upgrade-list {
+  margin-bottom: 20px;
+}
+
+.upgrade-item {
+  font-size: 18px;
+  padding: 10px;
+  background-color: #4CAF50;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.upgrade-item:hover {
+  background-color: #45a049;
+}
+
 #game-container {
   position: relative;
   width: 400px;
@@ -24,6 +79,7 @@ body {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  display: none;
 }
 
 #background {
@@ -42,6 +98,7 @@ body {
     left: -1200px;
   }
 }
+
 #character {
   position: absolute;
   width: 75px;
@@ -61,6 +118,7 @@ body {
     transform: translateY(-10px);
   }
 }
+
 .pipe {
   position: absolute;
   width: 60px;
@@ -70,6 +128,7 @@ body {
   transition: right 0.1s linear;
   z-index: 5;
 }
+
 .pipe-green {
   background: url("assets/sprites/bottomgreen.png");
   background-repeat: repeat;
@@ -86,6 +145,7 @@ body {
   z-index: 6;
   left: -6px;
 }
+
 .pipehead-green {
   background: url(assets/sprites/topgreen.png);
   background-repeat: no-repeat;
@@ -113,6 +173,7 @@ body {
     transform: rotate(360deg);
   }
 }
+
 #score {
   position: absolute;
   top: 10px;
@@ -321,4 +382,4 @@ body {
   color: #fff;
 }
 
-/* Rest des CSS bleibt unverändert *//*# sourceMappingURL=styles.css.map */
+/* Rest des CSS bleibt unverändert */

@@ -1,14 +1,19 @@
 <html>
 <head>
-        <title>Flappy Bacon</title>
-        <link rel="stylesheet" type="text/css" href="styles.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    </head>
+    <title>Flappy Bacon</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 </head>
 
 <body>
     <!-- audio file -->
     <audio id="player" style="display:none;" autoplay controls><source src="lmao.mp3" type="audio/mp3"></audio>
+
+    <!-- Main Menu -->
+    <div id="main-menu">
+        <div id="start-game-button" class="menu-button">Start Game</div>
+        <div id="upgrades-button" class="menu-button">Upgrades</div>
+    </div>
 
     <!-- Game Container -->
     <div id="game-container">
@@ -28,6 +33,17 @@
             <p>Press SPACE to jump!</p>
             <p>Avoid the pipes and collect bacon!</p>
         </div>
+    </div>
+
+    <!-- Upgrades Menu -->
+    <div id="upgrades-menu">
+        <h1>Upgrades</h1>
+        <div id="upgrade-list">
+            <div class="upgrade-item">Upgrade 1</div>
+            <div class="upgrade-item">Upgrade 2</div>
+            <div class="upgrade-item">Upgrade 3</div>
+        </div>
+        <div id="back-to-menu-button" class="menu-button">Back to Menu</div>
     </div>
 
     <!-- Leaderboard -->
